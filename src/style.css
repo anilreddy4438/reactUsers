@@ -1,0 +1,24 @@
+
+
+.card-position {
+    position: relative;
+    top: 250px;
+    left : 35% !important;
+}
+.button-pos {
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+
+.card-position1 {
+    position: relative;
+    top: 150px;
+    left : 15% !important;
+}
+.right{
+    float: right;
+}
+.left{
+    float: left;
+}
