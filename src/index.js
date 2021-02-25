@@ -6,6 +6,7 @@ import thunk from 'redux-thunk'
 import { logger } from 'redux-logger'
 import rootReducer from './reducer'
 import App from "./Modules/App"   
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const store = createStore(
   rootReducer,

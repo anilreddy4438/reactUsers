@@ -30,6 +30,11 @@ export function loginApi (userdata) {
     return function (dispatch) {
       dispatch(requestLogin());
     Get().then(json =>{
+        json.map(ele => {
+            let obj = ele;
+            ele['checked'] = false;
+            return obj
+        })
         dispatch(loginSucess(json));
         history.push("/user");
 

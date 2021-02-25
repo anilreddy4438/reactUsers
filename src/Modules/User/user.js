@@ -12,6 +12,7 @@ class User extends React.Component {
     this.openPopup = this.openPopup.bind(this);
     this.closePopup = this.closePopup.bind(this);
     this.saveChanges = this.saveChanges.bind(this);
+    this.checkboxHandler = this.checkboxHandler.bind(this);
   }
   itemList(art) {
     this.props.itemList(art);
@@ -33,36 +34,41 @@ class User extends React.Component {
             </Modal.Header>
 
             <Modal.Body>
-              <div className=" row">
-                <table className="table table-striped">
-                  <thead>
-                    <tr>
-                      <td></td>
-                      <th>Id</th>
-                      <th>Title</th>
-                      <th>State</th>
-                      <th>User</th>
-                    </tr>
-                  </thead>
-                  {this.props.Datajson.map((ele) => {
-                    return (
+              <div className=" row col-lg-12">
+                <div className="  col-lg-12">
+                  <table className="table table-striped">
+                    <thead>
                       <tr>
-                        <tr>
-                          {" "}
-                          <input
-                            type="checkbox"
-                            class="form-check-input"
-                            id="exampleCheck1"
-                          />
-                        </tr>
-                        <td>{ele.id}</td>
-                        <td>{ele.title}</td>
-                        <td>{ele.state}</td>
-                        <td>{ele.user.login}</td>
+                        <td></td>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>State</th>
+                        <th>Labels</th>
+                        <th>User</th>
                       </tr>
-                    );
-                  })}
-                </table>
+                    </thead>
+                    <tbody>
+                      {this.props.Datajson.map((ele, i) => {
+                        return (
+                          <tr key={i}>
+                            <td>
+                              <input  type="checkbox"  className="form-check-input"  id="exampleCheck1"  checked={ele.checked} onChange={this.checkboxHandler} />
+                            </td>
+                            <td>{ele.id}</td>
+                            <td>{ele.title}</td>
+                            <td>{ele.state}</td>
+                            <td>
+                              {ele.labels.map((ele1, i) => {
+                                return <span key={i}>{ele1.name}</span>;
+                              })}
+                            </td>
+                            <td>{ele.user.login}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </Modal.Body>
 
@@ -70,14 +76,16 @@ class User extends React.Component {
               <Button variant="secondary" onClick={this.closePopup}>
                 Close
               </Button>
-              <Button variant="primary" onClick={this.saveChanges} >Save changes</Button>
+              <Button variant="primary" onClick={this.saveChanges}>
+                Save changes
+              </Button>
             </Modal.Footer>
           </Modal>
         )}
         <div className="row col-lg-12 right">
           <button
             type="button"
-            class="btn btn-secondary"
+            className="btn btn-secondary"
             onClick={this.openPopup}
           >
             Add to Watch List
@@ -91,19 +99,27 @@ class User extends React.Component {
                   <th>Id</th>
                   <th>Title</th>
                   <th>State</th>
+                  <th>Labels</th>
                   <th>User</th>
                 </tr>
               </thead>
-              {this.props.Datajson.map((ele) => {
-                return (
-                  <tr>
-                    <td>{ele.id}</td>
-                    <td>{ele.title}</td>
-                    <td>{ele.state}</td>
-                    <td>{ele.user.login}</td>
-                  </tr>
-                );
-              })}
+              <tbody>
+                {this.props.Datajson.map((ele, j) => {
+                  return (
+                    <tr key={j}>
+                      <td>{ele.id}</td>
+                      <td>{ele.title}</td>
+                      <td>{ele.state}</td>
+                      <td>
+                        {ele.labels.map((ele1, i) => {
+                          return <span key={i}>{ele1.name}</span>;
+                        })}
+                      </td>
+                      <td>{ele.user.login}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
             </table>
           </div>
         </div>
@@ -118,7 +134,10 @@ class User extends React.Component {
     this.setState({ show: false });
   }
   saveChanges(ev) {
-    console.log('this save changes')
+    console.log("this save changes");
+  }
+  checkboxHandler(ev,ele){
+    console.log(ev,ele)
   }
 }
 

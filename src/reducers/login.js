@@ -10,8 +10,6 @@ const loginReducer = (state = {}, action) => {
             return { ...state, userData: action.userData , loading: false };
         case LOGIN_FAIL:
             return { ...state , err : action.err , loading: false };
-        case REDIRECT:
-            return { ...state, link: action.link , loading: false };
         default:
             return state;
     }
